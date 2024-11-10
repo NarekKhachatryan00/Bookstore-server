@@ -55,11 +55,12 @@ app.post('/api/order', verifyUser, async (req, res) => {
   
     try {
       const [result] = await connection.execute(
-        'INSERT INTO orders (username, address, payment_method, total_price) VALUES (?, ?, ?, ?)',
+        'INSERT INTO orders (name, address, payment_method, total_price) VALUES (?, ?, ?, ?)',
         [username, address, payment_method, total_price]
       );
   
       res.json({ status: 'Success', message: 'Order placed successfully!' });
+      console.log('Order placed successfully!');
     } catch (error) {
       console.error('Error placing order:', error);
       res.status(500).json({ error: 'Error placing order' });
